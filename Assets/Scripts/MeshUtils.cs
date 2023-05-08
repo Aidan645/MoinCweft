@@ -5,7 +5,7 @@ public static class MeshUtils
     private static Mesh s_UnitQuad;
     private static Mesh s_UnitCube;
 
-    public static Mesh UnitQuad
+    public static Mesh UnitQuad // 1x1x1 cube
     {
         get
         {
@@ -20,8 +20,7 @@ public static class MeshUtils
             return s_UnitQuad;
         }
     }
-
-    public static Mesh UnitCube
+    public static Mesh UnitCube // 1x1 quad facing up
     {
         get
         {
@@ -133,15 +132,7 @@ public static class MeshUtils
         }
 
     }
-
-    public struct MeshData
-    {
-        public Vector3[] vertices;
-        public Vector3[] normals;
-        public int[] triangles;
-    }
-
-    public static Mesh Cylinder(int circumferencePoints, float topRadius, float bottomRadius, float height)
+    public static Mesh Cylinder(int circumferencePoints, float topRadius, float bottomRadius, float height) // variable cylinder
     {
         Mesh cylinderMesh = new Mesh();
 
@@ -213,76 +204,4 @@ public static class MeshUtils
 
         return cylinderMesh;
     }
-    //public static MeshData Cylinder(int circumferencePoints, float topRadius, float bottomRadius, float height, bool returnas) //????????????? WIP could be a class of cylinder data which has a getter for the mesh object which makes the mesh object and a Getter for meshdata values.
-    //{
-    //    Mesh cylinderMesh = new Mesh();
-
-    //    // Calculate the number of vertices needed for the cylinder
-    //    int numVertices = circumferencePoints * 6 + 2;
-
-    //    // Calculate the angle between each point on the circumference in radians
-    //    float radiansBetweenCircumferencePoints = 2 * Mathf.PI / circumferencePoints;
-
-    //    // Initialize arrays to hold the vertices, normals, and triangles of the cylinder mesh
-    //    Vector3[] vertices = new Vector3[numVertices];
-    //    Vector3[] normals = new Vector3[numVertices];
-    //    int[] triangles = new int[circumferencePoints * 12];
-
-    //    // Create top and bottom vertices and normals;
-    //    vertices[0] = new Vector3(0, height, 0);
-    //    vertices[1] = new Vector3(0, 0, 0);
-    //    normals[0] = Vector3.up;
-    //    normals[1] = Vector3.down;
-    //    // Create Vertices, normals and triangles for the top
-    //    for (int i = 0; i < circumferencePoints; i++)
-    //    {
-    //        float angle = radiansBetweenCircumferencePoints * i;
-    //        vertices[i + 2] = new Vector3(topRadius * Mathf.Sin(angle), height, topRadius * Mathf.Cos(angle));
-    //        normals[i + 2] = Vector3.up;
-    //        triangles[i * 3] = (i % circumferencePoints) + 2;
-    //        triangles[i * 3 + 1] = ((i + 1) % circumferencePoints) + 2;
-    //        triangles[i * 3 + 2] = 0;
-
-    //    }
-
-    //    // Create Vertices, normals and triangles for the bottom
-    //    for (int i = 0; i < circumferencePoints; i++)
-    //    {
-    //        float angle = radiansBetweenCircumferencePoints * i;
-    //        vertices[i + circumferencePoints + 2] = new Vector3(bottomRadius * Mathf.Sin(angle), 0, bottomRadius * Mathf.Cos(angle));
-    //        normals[i + 2 + circumferencePoints] = Vector3.down;
-    //        triangles[(i + circumferencePoints) * 3] = (i % circumferencePoints) + 2 + circumferencePoints;
-    //        triangles[(i + circumferencePoints) * 3 + 2] = ((i + 1) % circumferencePoints) + 2 + circumferencePoints;
-    //        triangles[(i + circumferencePoints) * 3 + 1] = 1;
-    //    }
-
-    //    // Create Vertices, normals and triangles for the side
-    //    for (int i = 0; i < circumferencePoints; i++)
-    //    {
-    //        float angle = radiansBetweenCircumferencePoints * i;
-
-    //        vertices[i * 4 + circumferencePoints * 2 + 2] = new Vector3(topRadius * Mathf.Sin(angle), height, topRadius * Mathf.Cos(angle));
-    //        vertices[i * 4 + circumferencePoints * 2 + 2 + 1] = new Vector3(bottomRadius * Mathf.Sin(angle), 0, bottomRadius * Mathf.Cos(angle));
-    //        vertices[i * 4 + circumferencePoints * 2 + 2 + 2] = new Vector3(topRadius * Mathf.Sin(angle + radiansBetweenCircumferencePoints), height, topRadius * Mathf.Cos(angle + radiansBetweenCircumferencePoints));
-    //        vertices[i * 4 + circumferencePoints * 2 + 2 + +3] = new Vector3(bottomRadius * Mathf.Sin(angle + radiansBetweenCircumferencePoints), 0, bottomRadius * Mathf.Cos(angle + radiansBetweenCircumferencePoints));
-    //        for (int j = 0; j < 4; j++)
-    //        {
-    //            normals[i + circumferencePoints * 2 + 2 + j] = Vector3.Cross(vertices[i * 4 + circumferencePoints * 2 + 2], vertices[i * 4 + circumferencePoints * 2 + 2 + 1]);
-    //        }
-    //        triangles[(i + circumferencePoints) * 6] = i * 4 + circumferencePoints * 2 + 2;
-    //        triangles[(i + circumferencePoints) * 6 + 2] = i * 4 + circumferencePoints * 2 + 2 + 2;
-    //        triangles[(i + circumferencePoints) * 6 + 1] = i * 4 + circumferencePoints * 2 + 2 + 1;
-    //        triangles[(i + circumferencePoints) * 6 + 3] = i * 4 + circumferencePoints * 2 + 2 + 1;
-    //        triangles[(i + circumferencePoints) * 6 + 4] = i * 4 + circumferencePoints * 2 + 2 + 3;
-    //        triangles[(i + circumferencePoints) * 6 + 5] = i * 4 + circumferencePoints * 2 + 2 + 2;
-    //    }
-
-    //    // Set the vertices, normals, and triangles of the cylinder mesh
-    //    cylinderMesh.vertices = vertices;
-    //    cylinderMesh.triangles = triangles;
-    //    cylinderMesh.RecalculateBounds();
-    //    cylinderMesh.RecalculateNormals();
-
-    //    return cylinderMesh;
-    //}
 }
