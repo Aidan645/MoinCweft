@@ -14,8 +14,7 @@ public class GenerateField : MonoBehaviour
         {
             for(int j = 0; j < size; j++)
             {
-                GameObject fieldblockthingy = Instantiate(fieldblock);
-                fieldblockthingy.transform.position = new Vector3(i, 0, j);
+                GameObject fieldblockthingy = Instantiate(fieldblock,new Vector3(i, 0, j), Quaternion.identity, gameObject.transform);
             }
         }
     }

@@ -66,7 +66,7 @@ public static class MeshUtils
                     new Vector3(0.5f, -0.5f, 0.5f),
                     new Vector3(0.5f, 0.5f, 0.5f),
                 };
-                float third = 0.3331f;
+                float third = 1/3f;
                 s_UnitCube.uv = new Vector2[]
                 {
                     // bottom face
