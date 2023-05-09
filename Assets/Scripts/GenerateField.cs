@@ -15,7 +15,7 @@ public class GenerateField : MonoBehaviour
             for(int j = 0; j < size; j++) // for z
             {
                 // make block prefab as child of this gameobject at x,0,z with base rotation.
-                GameObject fieldblockthingy = Instantiate(fieldblock,new Vector3(i, 0, j), Quaternion.identity, gameObject.transform);
+                GameObject fieldblockthingy = Instantiate(fieldblock,new Vector3(i-size/2, 0, j-size/2), Quaternion.identity, gameObject.transform);
             }
         }
     }

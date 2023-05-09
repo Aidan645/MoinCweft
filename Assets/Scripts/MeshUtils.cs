@@ -30,40 +30,40 @@ public static class MeshUtils
                 s_UnitCube.vertices = new Vector3[]
                 {
                     // Bottom face
-                    new Vector3(-0.5f, -0.5f, -0.5f), //lo
-                    new Vector3(0.5f,-0.5f, -0.5f), // lb
-                    new Vector3(-0.5f, -0.5f, 0.5f), // ro
-                    new Vector3(0.5f, -0.5f, 0.5f), // rb
+                    new Vector3(0, 0, 0), //lo
+                    new Vector3(1,0, 0), // lb
+                    new Vector3(0, 0, 1), // ro
+                    new Vector3(1, 0, 1), // rb
 
                     // Top face
-                    new Vector3(-0.5f, 0.5f, -0.5f),
-                    new Vector3(-0.5f, 0.5f, 0.5f),
-                    new Vector3(0.5f, 0.5f, -0.5f),
-                    new Vector3(0.5f, 0.5f, 0.5f),
+                    new Vector3(0, 1, 0),
+                    new Vector3(0,1, 1),
+                    new Vector3(1, 1, 0),
+                    new Vector3(1, 1, 1),
 
                     // Left face
-                    new Vector3(0.5f, -0.5f, 0.5f),
-                    new Vector3(0.5f, 0.5f, 0.5f),
-                    new Vector3(-0.5f, -0.5f, 0.5f),
-                    new Vector3(-0.5f, 0.5f, 0.5f),
+                    new Vector3(1, 0, 1),
+                    new Vector3(1, 1,1),
+                    new Vector3(0, 0, 1),
+                    new Vector3(0, 1, 1),
 
                     // Right face
-                    new Vector3(-0.5f, -0.5f, -0.5f),
-                    new Vector3(-0.5f, 0.5f, -0.5f),
-                    new Vector3(0.5f, -0.5f, -0.5f),
-                    new Vector3(0.5f, 0.5f, -0.5f),
+                    new Vector3(0, 0, 0),
+                    new Vector3(0, 1, 0),
+                    new Vector3(1, 0, 0),
+                    new Vector3(1, 1, 0),
 
                     // Front face
-                    new Vector3(-0.5f, -0.5f, 0.5f),
-                    new Vector3(-0.5f, 0.5f, 0.5f),
-                    new Vector3(-0.5f, -0.5f, -0.5f),
-                    new Vector3(-0.5f, 0.5f, -0.5f),
+                    new Vector3(0, 0, 1),
+                    new Vector3(0, 1, 1),
+                    new Vector3(0, 0, 0),
+                    new Vector3(0, 1, 0),
 
                     // Back face
-                    new Vector3(0.5f, -0.5f, -0.5f),
-                    new Vector3(0.5f, 0.5f, -0.5f),
-                    new Vector3(0.5f, -0.5f, 0.5f),
-                    new Vector3(0.5f, 0.5f, 0.5f),
+                    new Vector3(1, 0, 0),
+                    new Vector3(1, 1, 0),
+                    new Vector3(1, 0, 1),
+                    new Vector3(1, 1, 1),
                 };
                 float third = 1/3f;
                 s_UnitCube.uv = new Vector2[]
