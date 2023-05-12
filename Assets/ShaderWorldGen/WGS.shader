@@ -1,4 +1,4 @@
-Shader "Unlit/WGS"
+Shader "WorldGeneration/WGS"
 {
     Properties
     {
