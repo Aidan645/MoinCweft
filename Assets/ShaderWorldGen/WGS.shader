@@ -5,8 +5,11 @@ Shader "WorldGeneration/WGS"
         _SeedX("SeedX", Float) = 0
         _SeedY("SeedY", Float) = 0
         _RainScale("RainScale", Float) = 1
+        _RainMult("RainMultiplier", Float)= 1
         _TempScale("TemperatureScale", Float) = 1
+        _TempMult("TempMultiplier",Float) = 1
         _NutScale("NutrientScale", Float) = 1
+        _NutMult("MutrientMultiplier", Float)=1
     }
     SubShader
     {
@@ -20,7 +23,6 @@ Shader "WorldGeneration/WGS"
             #pragma fragment frag
 
             #pragma target 3.0
-            // make fog work
             #include "UnityCG.cginc"
             #include "noiseSimplex.cginc"
 
@@ -28,8 +30,19 @@ Shader "WorldGeneration/WGS"
             float _SeedX;
             float _SeedY;
             float _RainScale;
+            float _RainMult;
             float _TempScale;
+            float _TempMult;
             float _NutScale;
+            float _NutMult;
+
+            float4 Colorlist[4] = {
+                float4(0.3f,    1,      0.3f,   1),
+                float4(0.1f,    0.5f,   0.1f,   1), 
+                float4(1,       1,      0.3f,   1), 
+                float4(1,       0,      0,      1)
+                };
+
 
             struct appdata
             {
@@ -43,28 +56,37 @@ Shader "WorldGeneration/WGS"
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 return o;
-            }
+            };
 
             float4 frag(v2f i) : SV_Target
             {
                 float2 RainSampleUV = i.uv * _RainScale + float2(_SeedX,_SeedY);
                 float rain = snoise(RainSampleUV)/2 + 0.5f;
                 float2 TempSampleUV = i.uv * _TempScale + float2(_SeedX, 4*_SeedY);
-                float temp = snoise(TempSampleUV) / 2 + 0.5f;
+                float temp = snoise(TempSampleUV)/2 + 0.5f;
                 float2 NutSampleUV = i.uv * _NutScale + float2(6*_SeedX, _SeedY);
-                float nut = snoise(NutSampleUV) / 2 + 0.5f;
-                float4 col = float4(temp,nut,rain,1);
-                return col;
-            }
+                float nut = snoise(NutSampleUV)/2 + 0.5f;
+
+                bool muchrain = (rain>0.3f);
+                bool muchheat = (temp>0.5f);
+                if (muchrain){
+                    if (muchheat){
+                        return float4(0.04,0.08,0.04,1); // jungle
+                    }
+                    return float4(0.1,0.3,0.1,1); // forest
+                }
+                if (muchheat){
+                    return float4(1,1,0.3,1); // desert
+                }
+                return float4(0.3,1,0.3,1); // plains
+            };
+
             ENDCG
         }
     }

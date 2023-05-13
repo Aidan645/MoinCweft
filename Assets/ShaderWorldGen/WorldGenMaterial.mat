@@ -67,16 +67,19 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _NutScale: 1.05
+    - _NutMult: 1
+    - _NutScale: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RainScale: -23.3
-    - _SeedX: 58.19
-    - _SeedY: 91.6
+    - _RainMult: 2.66
+    - _RainScale: 2
+    - _SeedX: 998.77
+    - _SeedY: 100
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TempScale: 10.47
+    - _TempMult: 10.2
+    - _TempScale: 10.82
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
