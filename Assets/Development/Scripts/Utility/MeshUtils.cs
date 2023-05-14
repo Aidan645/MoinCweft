@@ -20,6 +20,7 @@ public static class MeshUtils
             return s_UnitQuad;
         }
     }
+
     public static Mesh UnitCube // 1x1 quad facing up
     {
         get

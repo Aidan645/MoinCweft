@@ -14,12 +14,12 @@ public class WorldStructure
             y = yd;
         }
     }
-    public class Chunk
+    public class Chunk2
     {
         public int Chunksize = 16;
         public ChunkCoordinates Position;
         public float[][] HeightMap;
-        public Chunk(int x, int y)
+        public Chunk2(int x, int y)
         {
             Position = new ChunkCoordinates(x,y);
             GenerateHeightMap();

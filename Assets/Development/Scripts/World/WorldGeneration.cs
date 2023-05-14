@@ -10,7 +10,7 @@ public class WorldGeneration : MonoBehaviour
     {
         GenerateBlockDict();
     }
-    public void InitializeChunk(Chunk chunk)
+    public void InitializeChunk(Chunk2 chunk)
     {
         for (int i = 0; i < chunk.Chunksize; i++)
         {
