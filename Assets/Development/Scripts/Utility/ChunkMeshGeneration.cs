@@ -60,7 +60,7 @@ public class ChunkMeshGeneration
     {
         new Vector3Int(0, 1, 0),
         new Vector3Int(0, 1, 1),
-        new Vector3Int(0, 1, 1),
+        new Vector3Int(1, 1, 1),
         new Vector3Int(1, 1, 0)
     };
 
@@ -114,7 +114,7 @@ public class ChunkMeshGeneration
         {
             { Vector3Int.right, new Facedata(RightFace, RightTris) },
             { Vector3Int.left, new Facedata(LeftFace, LeftTris) },
-            { Vector3Int.up, new Facedata(RightFace, RightTris) },
+            { Vector3Int.up, new Facedata(UpFace, UpTris) },
             { Vector3Int.down, new Facedata(DownFace, DownTris) },
             { Vector3Int.forward, new Facedata(ForwardFace, ForwardTris) },
             { Vector3Int.back, new Facedata(BackFace, BackTris) }
@@ -137,9 +137,10 @@ public class ChunkMeshGeneration
                     foreach(Vector3Int direction in CheckDirections)
                     {
                         Vector3Int toCheck = pos + direction;
+
                         if (chunk.IsAir(pos) || !chunk.IsAir(toCheck)) continue;
 
-                        foreach(Vector3Int vert in CubeFacesMap[direction].Vertices) vertices.Add(pos + vert);
+                        foreach(Vector3Int vert in CubeFacesMap[direction].Vertices) vertices.Add(pos + vert + Chunk.CHUNK_SIZE*new Vector3Int(chunk.ChunkXPos,0,chunk.ChunkZPos));
                         foreach (int triIndex in CubeFacesMap[direction].Triangles) triangles.Add(vertices.Count - 4 + triIndex);
 
                     }
@@ -148,8 +149,8 @@ public class ChunkMeshGeneration
             }
         }
         Mesh res = new Mesh();
-        res.SetVertices(vertices);
-        res.SetIndices(triangles, MeshTopology.Triangles, 0);
+        res.SetVertices(vertices.ToArray());
+        res.SetIndices(triangles.ToArray(), MeshTopology.Triangles, 0);
 
         res.RecalculateBounds();
         res.RecalculateNormals();

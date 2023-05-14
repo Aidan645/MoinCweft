@@ -14,7 +14,7 @@ public class GenerateOneChunk : MonoBehaviour
         {
             for (int j = 0; j < 6; j++)
             {
-                Chunk chunk = new Chunk(i, j);
+                Chunk2 chunk = new Chunk2(i, j);
                 worldgenerationmanager.GetComponent<WorldGeneration>().InitializeChunk(chunk);
             }
         }
