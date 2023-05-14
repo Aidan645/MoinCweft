@@ -35,6 +35,7 @@ Shader "WorldGeneration/WGS"
             float _TempMult;
             float _NutScale;
             float _NutMult;
+            int _NumOctaves;
 
             float4 Colorlist[4] = {
                 float4(0.3f,    1,      0.3f,   1),
@@ -66,12 +67,18 @@ Shader "WorldGeneration/WGS"
 
             float4 frag(v2f i) : SV_Target
             {
-                float2 RainSampleUV = i.uv * _RainScale + float2(_SeedX,_SeedY);
-                float rain = snoise(RainSampleUV)/2 + 0.5f;
-                float2 TempSampleUV = i.uv * _TempScale + float2(_SeedX, 4*_SeedY);
-                float temp = snoise(TempSampleUV)/2 + 0.5f;
-                float2 NutSampleUV = i.uv * _NutScale + float2(6*_SeedX, _SeedY);
-                float nut = snoise(NutSampleUV)/2 + 0.5f;
+                float rain = 0;
+                float temp = 0;
+                float nut = 0;
+                for (int i = 0; i< _NumOctaves;i++){
+                    float2 RainSampleUV = i.uv * _RainScale * i + float2(_SeedX,_SeedY);
+                    rain += (1/i)*(snoise(RainSampleUV)/2 + 0.5f);
+                    float2 TempSampleUV = i.uv * _TempScale* i + float2(_SeedX, 4*_SeedY);
+                    temp += (1/i)*(snoise(TempSampleUV)/2 + 0.5f);
+                    float2 NutSampleUV = i.uv * _NutScale* i + float2(6*_SeedX, _SeedY);
+                    nut += (1/i)*(snoise(NutSampleUV)/2 + 0.5f);
+                }
+                
 
                 bool muchrain = (rain>0.3f);
                 bool muchheat = (temp>0.5f);

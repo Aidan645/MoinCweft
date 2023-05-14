@@ -1,0 +1,65 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel WorldGeneration
+#include "UnityCG.cginc"
+#include "noiseSimplex.cginc"
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+
+
+RWTexture2D<float4> Result;
+
+
+float _SeedX = 0;
+float _SeedY = 0;
+
+float _RainScale = 1;
+float _RainMult = 1;
+
+float _TempScale = 1;
+float _TempMult = 1;
+
+float _NutScale = 1;
+float _NutMult = 1;
+
+int _NumOctaves = 1;
+
+[numthreads(8,8,1)]
+void WorldGeneration (uint3 id : SV_DispatchThreadID)
+{
+    float2 startingpos = float2(_SeedX,_SeedY);
+    float rain = 0;
+    float temp = 0;
+    float nut = 0;
+
+    for (int i = 1;i<=_NumOctaves;i++){
+
+    float2 RainSampleUV = id.xy * _RainScale*i + startingpos;
+    rain += (1/(sqrt(i)))*_RainMult*(snoise(RainSampleUV) / 2 + 0.5f);
+
+    float2 TempSampleUV = id.xy * _TempScale*i + startingpos*4;
+    temp += (1/(sqrt(i)))*_TempMult*(snoise(TempSampleUV) / 2 + 0.5f);
+
+    float2 NutSampleUV = id.xy * _NutScale*i + startingpos*13;
+    nut += (1/(sqrt(i)))*_NutMult*(snoise(NutSampleUV) / 2 + 0.5f);
+
+    }
+    rain = rain/pow(_NumOctaves,0.70f);
+    temp = temp/pow(_NumOctaves,0.70f);
+
+    bool muchrain = (rain > 0.5f);
+    bool muchheat = (temp > 0.5f);
+
+    if (muchrain) {
+        if (muchheat) {
+            Result[id.xy] = float4(0.04, 0.08, 0.04, 1); // jungle
+            return;
+        }
+        Result[id.xy] = float4(0.1, 0.3, 0.1, 1); // forest
+        return;
+    }
+    if (muchheat) {
+        Result[id.xy] = float4(1, 1, 0.3, 1); // desert
+        return;
+    }
+    Result[id.xy] = float4(0.3, 1, 0.3, 1); // plains
+}
