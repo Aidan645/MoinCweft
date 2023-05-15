@@ -51,6 +51,6 @@ public class WriteBiomesToPNG : MonoBehaviour
         DestroyImmediate(RT);
         byte[] data;
         data = tex2save.EncodeToPNG();
-        System.IO.File.WriteAllBytes("Assets/ShaderWorldGen/Image.png", data);
+        System.IO.File.WriteAllBytes("Assets/ShaderWorldGen//BiomeShader/Image.png", data);
     }
 }

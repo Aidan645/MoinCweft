@@ -20,12 +20,13 @@ public class Chunk
     /// <param name="blockTypes"></param>
     /// <param name="ChunkXPos"></param>
     /// <param name="ChunkYPos"></param>
-    public Chunk(int[,,] blockTypes, int ChunkXPos, int ChunkYPos)
+    public Chunk(int ChunkXPos, int ChunkYPos)
     {
         Blocks = new int[CHUNK_SIZE, CHUNK_SIZE, CHUNK_HEIGHT];
         this.ChunkXPos = ChunkXPos;
         this.ChunkZPos = ChunkYPos;
-        Blocks = blockTypes;
+    }
+    public void Meshify(){
         Mesh = ChunkMeshGeneration.generateChunkMesh(this);
     }
 

@@ -1,0 +1,31 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel WorldGeneration
+#include "UnityCG.cginc"
+#include "noiseSimplex.cginc"
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+
+
+RWTexture2D<float4> Result;
+
+float _SeedX = 0;
+float _SeedY = 0;
+
+float _Scale = 1;
+
+int _NumOctaves = 1;
+
+[numthreads(8,8,1)]
+void WorldGeneration (uint3 id : SV_DispatchThreadID)
+{
+    float2 startingpos = float2(_SeedX,_SeedY);
+    float height = 0;
+
+    for (int i = 1;i<=_NumOctaves;i++){
+    float2 HeightUV = id.xy * _Scale*i + startingpos;
+    height += (1/(sqrt(i)))*(snoise(HeightUV) / 2 + 0.5f);
+    }
+    height = height/pow(_NumOctaves,0.70f);
+
+    Result[id.xy] = float4(height,height,height,1);
+}

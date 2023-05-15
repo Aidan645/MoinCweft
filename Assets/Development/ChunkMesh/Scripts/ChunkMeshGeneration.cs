@@ -125,6 +125,7 @@ public class ChunkMeshGeneration
     {
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
+        List<Vector3> normals = new List<Vector3>();
 
         for (int x = 0; x < Chunk.CHUNK_SIZE; x++)
         {
@@ -140,9 +141,11 @@ public class ChunkMeshGeneration
 
                         if (chunk.IsAir(pos) || !chunk.IsAir(toCheck)) continue;
 
-                        foreach(Vector3Int vert in CubeFacesMap[direction].Vertices) vertices.Add(pos + vert + Chunk.CHUNK_SIZE*new Vector3Int(chunk.ChunkXPos,0,chunk.ChunkZPos));
+                        foreach(Vector3Int vert in CubeFacesMap[direction].Vertices) {
+                            vertices.Add(pos + vert + Chunk.CHUNK_SIZE*new Vector3Int(chunk.ChunkXPos,0,chunk.ChunkZPos));
+                            normals.Add(direction);
+                        }
                         foreach (int triIndex in CubeFacesMap[direction].Triangles) triangles.Add(vertices.Count - 4 + triIndex);
-
                     }
                     
                 }
@@ -151,7 +154,7 @@ public class ChunkMeshGeneration
         Mesh res = new Mesh();
         res.SetVertices(vertices.ToArray());
         res.SetIndices(triangles.ToArray(), MeshTopology.Triangles, 0);
-
+        res.SetNormals(normals.ToArray());
         res.RecalculateBounds();
         res.RecalculateNormals();
         res.RecalculateTangents();
