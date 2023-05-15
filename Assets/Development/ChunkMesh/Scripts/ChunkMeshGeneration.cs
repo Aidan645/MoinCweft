@@ -142,7 +142,6 @@ public class ChunkMeshGeneration
             { Vector3Int.forward, new Facedata(ForwardFace, ForwardTris, ZUVOrder) },
             { Vector3Int.back, new Facedata(BackFace, BackTris, ZUVOrder) }
         };
-    private BlockTextureLoader BlockTextureLoaderInstance;
 
 
 
@@ -157,7 +156,6 @@ public class ChunkMeshGeneration
             {
                 for (int z = 0; z < Chunk.CHUNK_SIZE; z++)
                 {
-
                     Vector3Int pos = new Vector3Int(x, y, z);
 
                     foreach(Vector3Int direction in CheckDirections)
@@ -166,7 +164,7 @@ public class ChunkMeshGeneration
 
                         if (chunk.IsAir(pos) || !chunk.IsAir(toCheck)) continue;
                         int BlockId = chunk.Blocks[pos.x, pos.y, pos.z];
-                        BlockTextureLoader.CubeTexture TextureToApply = TextureLoader.Textures[BlockId];
+                        BlockTextureLoader.CubeTexture TextureToApply = TextureLoader.CubeTextures[BlockId - 1];
                         Facedata FaceToApply = CubeFacesMap[direction];
 
                         foreach (Vector3Int vert in FaceToApply.Vertices) {

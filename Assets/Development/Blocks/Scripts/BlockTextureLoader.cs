@@ -16,16 +16,6 @@ public class BlockTextureLoader : MonoBehaviour
         }
     }
 
-    CubeTexture[] CubeTextures;
-    public Dictionary<int, CubeTexture> Textures;
+    public CubeTexture[] CubeTextures;
 
-    public void Start()
-    {
-        Textures = new Dictionary<int, CubeTexture>();
-
-        for(int i = 0;i < CubeTextures.Length;i++)
-        {
-            Textures.Add(i + 1, CubeTextures[i]);
-        }
-    }
 }
