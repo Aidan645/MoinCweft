@@ -144,7 +144,7 @@ public class ChunkMeshGeneration
         };
 
 
-    public static Mesh generateChunkMesh(Chunk chunk)
+    public static Mesh generateChunkMesh(Chunk chunk, BlockTextureLoader TextureLoader)
     {
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
@@ -163,15 +163,15 @@ public class ChunkMeshGeneration
                         Vector3Int toCheck = pos + direction;
 
                         if (chunk.IsAir(pos) || !chunk.IsAir(toCheck)) continue;
-                        int BlockId = chunk.Blocks[pos.x, pos.y, pos.z];
+                        int BlockId = chunk.Blocks[pos.x][pos.y][pos.z];
                         BlockTextureLoader.CubeTexture TextureToApply = TextureLoader.CubeTextures[BlockId];
                         Facedata FaceToApply = CubeFacesMap[direction];
 
                         foreach (Vector3Int vert in FaceToApply.Vertices) {
-                            Vertices.Add(pos + vert + Chunk.CHUNK_SIZE * new Vector3Int(chunk.ChunkXPos, 0, chunk.ChunkZPos));
+                            vertices.Add(pos + vert + Chunk.CHUNK_SIZE * new Vector3Int(chunk.ChunkXPos, 0, chunk.ChunkZPos));
                             normals.Add(direction);
                         }
-                        foreach (int triIndex in FaceToApply.Triangles) Triangles.Add(Vertices.Count - 4 + triIndex);
+                        foreach (int triIndex in FaceToApply.Triangles) triangles.Add(vertices.Count - 4 + triIndex);
 
                         Vector2[] UvsToAdd = TextureToApply.GetUVsAtDirection(direction);
                         foreach(int UVIndex in FaceToApply.UVIndexOrder)
@@ -184,8 +184,8 @@ public class ChunkMeshGeneration
             }
         }
         Mesh res = new Mesh();
-        res.SetVertices(Vertices.ToArray());
-        res.SetIndices(Triangles.ToArray(), MeshTopology.Triangles, 0);
+        res.SetVertices(vertices.ToArray());
+        res.SetIndices(triangles.ToArray(), MeshTopology.Triangles, 0);
         res.SetUVs(0, Uvs);
         res.SetNormals(normals.ToArray());
 

@@ -34,8 +34,6 @@ public class Chunk
         this.ChunkXPos = ChunkXPos;
         this.ChunkZPos = ChunkYPos;
     }
-
-    }
     public void Meshify(){
         Mesh = ChunkMeshGeneration.generateChunkMesh(this, new BlockTextureLoader());
     }
@@ -58,12 +56,12 @@ public class Chunk
 
     public bool IsAir(int x, int y, int z)
     {
-        return IsOutOfBounds(x,y,x) || Blocks[x, y, z] == AIR;
+        return IsOutOfBounds(x,y,x) || Blocks[x][y][z] == AIR;
     }
 
     public bool IsAir(Vector3Int pos)
     {
-        return IsOutOfBounds(pos) || Blocks[pos.x, pos.y,pos.z] == AIR;
+        return IsOutOfBounds(pos) || Blocks[pos.x][pos.y][pos.z] == AIR;
     }
 }
 
