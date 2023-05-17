@@ -37,15 +37,21 @@ public static class WorldBlockListGenerator
 
     public static int[][][] DirtGround(Chunk c, Texture2D biomemap){
         int[][][] blocklist = c.Blocks;
+        
         for (int x = 0; x < Chunk.CHUNK_SIZE; x++)
         {
             for (int z = 0; z < Chunk.CHUNK_SIZE; z++)
             {
-                int index  = Array.LastIndexOf(blocklist[x][Range.All][z],1);
-                blocklist[x][index][z] = 2;
-                for (int i = 0; i < 3; i++)
+                for (int y = Chunk.CHUNK_HEIGHT-1; y >= 0; y--)
                 {
-                    blocklist[x][index-1-i][z] = 3;
+                    if (blocklist[x][y][z] == 1){
+                        blocklist[x][y][z] = 2;
+                        for (int i = 1; i < 3; i++)
+                        {
+                            blocklist[x][Mathf.Max(y-i,0)][z] = 3;
+                        }                        
+                        break;
+                    }
                 }
             }
         }

@@ -31,11 +31,16 @@ public class BlockTextureLoader
         CubeTextures = new Dictionary<int, CubeTexture>();
         CalculateUVs();
         InsertBlock(BlockCollection.GRASS);
+        InsertBlock(BlockCollection.STONE);
+        InsertBlock(BlockCollection.AIR);
+        InsertBlock(BlockCollection.DIRT);
     }
 
     public void InsertBlock(Block block)
     {
-        CubeTextures.Add(block.Id, new CubeTexture(UvDict[block.SideIndex], UvDict[block.DownIndex], UvDict[block.UpIndex]));
+        if (block.Id != 0){
+            CubeTextures.Add(block.Id, new CubeTexture(UvDict[block.SideIndex], UvDict[block.DownIndex], UvDict[block.UpIndex]));
+        }
     }
 
     public void CalculateUVs()
