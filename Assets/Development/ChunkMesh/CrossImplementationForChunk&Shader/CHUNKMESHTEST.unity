@@ -246,7 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa68ea7656fd134ab6a7ee1bbbe2623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materal: {fileID: 2100000, guid: dff15acee17ed0140a4b18582cc1f702, type: 2}
+  materal: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  heightmap: {fileID: 2800000, guid: 3a17bf03eb930d640acf078ac03fb7d4, type: 3}
+  biomemap: {fileID: 2800000, guid: ef7a3fd02aef80a4b8c3f31f9e628c45, type: 3}
 --- !u!4 &1837502750
 Transform:
   m_ObjectHideFlags: 0
@@ -255,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837502746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5414137, y: 0.16922046, z: -1.5998201}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
