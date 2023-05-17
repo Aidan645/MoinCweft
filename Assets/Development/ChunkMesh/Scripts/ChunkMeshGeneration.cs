@@ -164,7 +164,7 @@ public class ChunkMeshGeneration
 
                         if (chunk.IsAir(pos) || !chunk.IsAir(toCheck)) continue;
                         int BlockId = chunk.Blocks[pos.x, pos.y, pos.z];
-                        BlockTextureLoader.CubeTexture TextureToApply = TextureLoader.CubeTextures[BlockId - 1];
+                        BlockTextureLoader.CubeTexture TextureToApply = TextureLoader.CubeTextures[BlockId];
                         Facedata FaceToApply = CubeFacesMap[direction];
 
                         foreach (Vector3Int vert in FaceToApply.Vertices) {

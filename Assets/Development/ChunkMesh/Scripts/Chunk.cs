@@ -26,7 +26,7 @@ public class Chunk
         this.ChunkXPos = ChunkXPos;
         this.ChunkZPos = ChunkYPos;
         Blocks = blockTypes;
-        Mesh = ChunkMeshGeneration.generateChunkMesh(this);
+        Mesh = ChunkMeshGeneration.generateChunkMesh(this, new BlockTextureLoader());
     }
 
 

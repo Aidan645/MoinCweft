@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ACHUNKYTEST : MonoBehaviour
@@ -8,6 +6,7 @@ public class ACHUNKYTEST : MonoBehaviour
     int[,,] list;
     void Start()
     {
+        
         int size = 16;
         Random.InitState(1293710992);
         for (int b = -6; b<6;b++){
@@ -21,7 +20,7 @@ public class ACHUNKYTEST : MonoBehaviour
                 for(int j = 0; j< size; j++){
                     for(int k = 0; k< size; k++){
                         if (Random.Range(0f,1f)<(1-0.05*j)){
-                        list[i,j,k] = 1;
+                        list[i,j,k] = BlockCollection.GRASS.Id;
                         }
                     
                     }
