@@ -7,7 +7,8 @@ public class ACHUNKYTEST : MonoBehaviour
 {
     public Material materal;
     public Texture2D heightmap;
-    int[,,] list;
+    public Texture2D biomemap;
+    int[][][] list;
     void Start()
     {
         GameObject ChunkBox = new GameObject("ChunkBox");
@@ -20,6 +21,7 @@ public class ACHUNKYTEST : MonoBehaviour
             MeshFilter mf = chonko.AddComponent<MeshFilter>();
             Chunk chunk = new Chunk(a,b);
             chunk.Blocks = StoneRelief(chunk, heightmap);
+            chunk.Blocks = DirtGround(chunk, biomemap);
             chunk.Meshify();
             mf.sharedMesh = chunk.Mesh;
             mr.material = materal;

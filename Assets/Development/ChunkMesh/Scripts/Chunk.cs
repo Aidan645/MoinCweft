@@ -10,7 +10,7 @@ public class Chunk
 
     public static int AIR = 0;
 
-    public int[,,] Blocks;
+    public int[][][] Blocks;
     public int ChunkXPos;
     public int ChunkZPos;
     public Mesh Mesh;
@@ -22,7 +22,15 @@ public class Chunk
     /// <param name="ChunkYPos"></param>
     public Chunk(int ChunkXPos, int ChunkYPos)
     {
-        Blocks = new int[CHUNK_SIZE, CHUNK_SIZE, CHUNK_HEIGHT];
+        Blocks = new int[CHUNK_SIZE][][];
+        for (int i = 0; i < CHUNK_SIZE; i++)
+        {
+            Blocks[i] = new int[CHUNK_HEIGHT][];
+            for (int j = 0; j < CHUNK_HEIGHT; j++)
+            {
+                Blocks[i][j] = new int[CHUNK_SIZE];
+            }
+        }
         this.ChunkXPos = ChunkXPos;
         this.ChunkZPos = ChunkYPos;
     }
@@ -48,12 +56,12 @@ public class Chunk
 
     public bool IsAir(int x, int y, int z)
     {
-        return IsOutOfBounds(x,y,x) || Blocks[x, y, z] == AIR;
+        return IsOutOfBounds(x,y,x) || Blocks[x][y][z] == AIR;
     }
 
     public bool IsAir(Vector3Int pos)
     {
-        return IsOutOfBounds(pos) || Blocks[pos.x, pos.y,pos.z] == AIR;
+        return IsOutOfBounds(pos) || Blocks[pos.x][pos.y][pos.z] == AIR;
     }
 }
 
