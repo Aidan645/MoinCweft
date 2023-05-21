@@ -34,6 +34,9 @@ public class BlockTextureLoader
         InsertBlock(BlockCollection.STONE);
         InsertBlock(BlockCollection.AIR);
         InsertBlock(BlockCollection.DIRT);
+        InsertBlock(BlockCollection.SAND);
+        InsertBlock(BlockCollection.PODZOL);
+        InsertBlock(BlockCollection.TERRACOTA);
     }
 
     public void InsertBlock(Block block)

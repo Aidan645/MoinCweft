@@ -21,7 +21,7 @@ public class ACHUNKYTEST : MonoBehaviour
             MeshFilter mf = chonko.AddComponent<MeshFilter>();
             Chunk chunk = new Chunk(a,b);
             chunk.Blocks = StoneRelief(chunk, heightmap);
-            chunk.Blocks = DirtGround(chunk, biomemap);
+            chunk.Blocks = BiomeCover(chunk, biomemap);
             chunk.Meshify();
             mf.sharedMesh = chunk.Mesh;
             mr.material = materal;
